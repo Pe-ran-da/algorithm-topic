@@ -1,0 +1,80 @@
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#define MAX 100005
+using namespace std;
+
+int arr1[MAX];
+int arr2[MAX];
+
+struct cmp{
+	bool operator ()(int &a, int &b) {
+		return a > b;
+	}
+};
+
+int main() {
+	int n;
+	priority_queue<int, vector<int>, cmp> que;
+	
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> arr1[i];
+	}
+	for (int i = 0; i < n; i++) {
+		cin >> arr2[i];
+	}
+	int index = (int)sqrt(n) * 2;  // saodeyipi  
+	for (int i = 0; i < index; i++) {
+		for (int j = 0; j < index; j++) {
+			int sum = arr1[i] + arr2[j];
+			que.push(sum);
+		}
+	}
+/*	int number = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (arr1[i] + arr2[j] > arr1[i + 1] + arr2[0] ) {
+				break;
+			} else { //(arr1[i] + arr2[j] < arr1[i + 1] + arr2[0]) && number <= n
+				if (number > n) break;
+				int sum = arr1[i] + arr2[j];
+				que.push(sum);
+				number++;
+			}
+		}
+		if (number > n) break;
+	}*/
+	
+/*	int I = 0, J = 0;
+	int num = 0;
+	while (true) {
+		if (arr1[I] + arr2[J] <= arr1[I + 1] + arr2[0]) {
+			que.push(arr1[I] + arr2[J]);
+			J++;
+			num++;
+		} else {
+			I++;
+			J = 0;	
+		}
+		if (num > n) break;
+	}
+	*****/
+	
+//	cout << que.size() << endl; 
+	int val = 0;
+	for (int i = 0; i < n; i++) {
+		if (i > 0) cout << " ";
+		cout << que.top();
+		que.pop();
+		val++;
+	}
+	/*cout << endl;
+	cout << " val: " << val;*/
+	return 0;
+}
+
+/* 开始想各种优化 但是总是不对， 在最后， 我将循环入堆的数开大两倍  因为最大数据为
+100,000  两个开方循环 不过才 100 * sqrt(10) * 100 * sqrt(10),  也就是不到10万的空间
+虽然不可取，但是优化居然过了*/ 
