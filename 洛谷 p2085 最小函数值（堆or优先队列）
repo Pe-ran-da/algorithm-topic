@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cstdlib>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#define MAX 10005
+using namespace std; 
+
+int a[MAX];
+int b[MAX]; 
+int c[MAX];
+int mark[MAX];
+priority_queue<pair<int, int> , vector<pair<int, int> >,greater<pair<int, int> > >que;
+struct cmp{
+	bool operator ()(int &a, int &b) {
+		return a > b;
+	} 
+};
+
+int main() {
+	int sum, key;
+	cin >> sum >> key;
+	for (int i = 0; i < sum; i++) {
+		cin >> a[i] >> b[i] >> c[i];
+		// 之前的错误思想 
+		/*for (int i = 1; i <= key; i++) {
+			int value = a * i * i + b * i + c;
+			que.push(value);
+		}*/
+		mark[i] = 1;
+		que.push(pair<int, int>((a[i] + b[i] + c[i]), i));
+	}
+	// 之前的错误思想 
+	/*while(--key) {
+		int val;
+		val = que.top();	
+		que.pop();
+		cout << val << " ";
+	}*/
+	for (int i = 0; i < key; i++) {
+		cout << que.top().first << " ";
+		int num = que.top().second;
+		int val = ++mark[num];
+		que.pop();
+		que.push(pair<int, int>(a[num] * val * val + b[num] * val + c[num], num));
+	}
+	return 0;
+}
+
