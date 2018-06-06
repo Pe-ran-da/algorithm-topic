@@ -1,0 +1,54 @@
+#include <iostream> 
+using namespace std;
+int main() {
+	int value;
+	cin >> value;
+	int a = 1, b = 0;
+	int a_a = 0, b_b = 0;
+	int i = 0;
+	if (a == 1) {   // 当 value为 1 的时候，先计算第一点 
+			b++;
+			i++;
+			if (i == value)	{
+				cout << a << "/" << b << endl;
+				return 0;
+			}
+		}
+		
+	for (;i < value;) {   // 不断的循环 
+		if (a == 1) {     // 左移一位 
+			b++;
+			i++;
+			if (i == value)	{
+				cout << a << "/" << b << endl;
+				return 0;
+			}
+		} 
+		b_b = b;
+		while (--b_b) {   // 斜向下 “/”这种斜线的斜法 
+			a++, b--;
+			i++;
+			if (i == value)	{
+				cout << a << "/" << b << endl;
+				return 0;
+			}
+		}
+		if (b == 1) {    // 下移一位 
+			a++;
+			i++;
+			if (i == value)	{
+				cout << a << "/" << b << endl;
+				return 0;
+			}
+		}
+		a_a = a;
+		while (--a_a) {   // 斜向上 “/”还是 这种斜线的斜法 
+			a--, b++;
+			i++;
+			if (i == value)	{
+				cout << a << "/" << b << endl;
+				return 0;
+			}
+		}
+	}
+}
