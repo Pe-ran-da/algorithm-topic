@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int main() {
+    float val = 0, dat = 7;
+    int first, second;
+    cin >> first >> second;
+    int left = first - second, right = first + second;
+    while (true) {
+        if (val >= left) {
+            if (val + dat <= right) {
+                cout << "y";
+            } else {
+                cout << "n";
+            }
+            break;
+        }
+        val += dat;
+        dat *= 0.98;
+    }
+    return 0;
+}
